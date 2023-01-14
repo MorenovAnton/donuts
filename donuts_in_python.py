@@ -97,6 +97,7 @@ while run:
             D = 1 / (c * h * e + f * g + 5)
             # The variables l, m, n, and t are used in the calculation of the 3D x and y coordinates
             # of each character on the screen AFTER ROTATION
+            # Переменные l, m, n и t используются при вычислении трехмерных координат x и y. каждого символа на экране ПОСЛЕ ВРАЩЕНИЯ
             l = math.cos(i)
             m = math.cos(B)
             n = math.sin(B)
@@ -124,14 +125,30 @@ while run:
                 z[o] = D
                 b[o] = chars[N if N > 0 else 0]
 
+    # В этой программе переменная y_start используется для отслеживания y-координаты экрана, на котором печатаются символы.
+    # Каждый раз, когда печатается символ, y_start увеличивается на y_separator, так что следующий символ будет напечатан в следующей строке.
+    # This code is used to reset the value of y_start to 0 once it reaches the end of the screen. This is done so that once the last
+    # row of characters is printed, the next set of characters will be printed on the first row of the screen, and not beyond the
+    # screen. This is how the animation of rotating donut is created, as characters are printed in a loop, and when the end of
+    # the screen is reached, the next set of characters is printed from the beginning of the screen.
     if y_start == rows * y_separator - y_separator:
         y_start = 0
 
+    # тут мы рисуем пончик
+    # loop that iterates over the length of b, which is a list containing the characters that will be displayed on the screen.
     for i in range(len(b)):
+        # The first thing that happens inside the loop is that the values of A and B are incremented by 0.00004 and 0.00002 respectively.
+        # A and B are the two variables that control the rotation of the donut. The values of A and B are used in the calculation
+        # of the 3D x and y coordinates of each character on the screen after rotation.
+        # A и B — две переменные, управляющие вращением пончика. Значения A и B используются при вычислении трехмерных координат x и y каждого символа на экране после поворота.
         A += 0.00004  # for faster rotation change to bigger value
         B += 0.00002  # for faster rotation change to bigger value
+        # check that looks at whether i is equal to 0 or whether i is divisible by columns.
+        # Проверка столбцов i == 0 или i % используется для отслеживания конца строки, и когда он достигает конца строки, следующий символ будет напечатан в следующей строке
         if i == 0 or i % columns:
+            # displays the character at index i of the b list at the current x and y coordinates.
             text_display(b[i], x_start, y_start)
+            # Увеличиваем значение на пробел
             x_start += x_separator
         else:
             y_start += y_separator
@@ -139,11 +156,14 @@ while run:
             text_display(b[i], x_start, y_start)
             x_start += x_separator
 
-
+    # The line pygame.display.update() updates the display surface with the latest changes.The hue variable is used to control the color of the characters that are printed on the screen.
     pygame.display.update()
-
+    # The value of hue is passed to the hsv2rgb(h, s, v) function, which converts the hue value to an RGB color.
+    # By incrementing the hue value, it creates the effect of the color of the characters changing over time.
     hue += 0.005
 
+    # used to handle events in the program. pygame.event.get(): is used to check for any events that have occurred.
+    # QUIT. pygame.QUIT is an event that is generated when the user closes the program
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
