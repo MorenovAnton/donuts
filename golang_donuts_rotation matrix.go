@@ -1,4 +1,23 @@
-package donuts
+package main
+
+func main() {
+	var (
+		WIDTH                      int = 1920
+		HEIGHT                     int = 1080
+		x_start, y_start               = 0, 0
+		x_separator, y_separator       = 10, 20
+		rows                       int = HEIGHT / y_separator
+		columns                    int = WIDTH / x_separator
+		screen_size                int = rows * columns
+		A, B                           = 0, 0
+		theta_spacing, phi_spacing     = 10, 1
+		x_offset, y_offset             = columns / 2, rows / 2
+		A, B                           = 0, 0
+		theta_spacing, phi_spacing     = 10, 1
+		chars                          = ".,-~:;=!*#$@"
+	)
+
+}
 
 /*
 import pygame
@@ -11,27 +30,12 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 hue = 0
 
-WIDTH = 1920
-HEIGHT = 1080
 
-x_start, y_start = 0, 0
 
-x_separator = 10
-y_separator = 20
 
-rows = HEIGHT // y_separator
-columns = WIDTH // x_separator
-screen_size = rows * columns
 
-x_offset = columns / 2
-y_offset = rows / 2
 
-A, B = 0, 0  # rotating animation
 
-theta_spacing = 10
-phi_spacing = 1 # for faster rotation change to 2, 3 or more, but first change 86, 87 lines as commented
-
-chars = ".,-~:;=!*#$@"  # luminance index
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
